@@ -1,0 +1,34 @@
+[project]
+name = "wingz-technical-assessment"
+version = "0.1.0"
+description = "Wingz Python/Django Developer Test"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "django>=6.0.0",
+    "djangorestframework>=3.17.1",
+    "psycopg[binary]>=3.3.4",
+    "python-dotenv>=1.2.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-django>=4.12.0",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.15.18",
+    "complexipy>=5.6.1",
+]
+
+[tool.ruff]
+line-length = 99
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP", "PL", "RUF", "N", "B", "C4"]
+ignore = []
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+python_files = ["test_*.py", "*_test.py", "tests.py"]
+addopts = "--ds=config.settings --cov=. --cov-report=term-missing"
