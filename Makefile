@@ -1,4 +1,4 @@
-.PHONY: build up down migrate test lint complexity lock
+.PHONY: build up down migrations migrate test lint complexity lock simulate report all
 
 build:
 	docker compose build
@@ -8,6 +8,9 @@ up:
 
 down:
 	docker compose down
+
+migrations:
+	docker compose run --rm web python manage.py makemigrations
 
 migrate:
 	docker compose run --rm web python manage.py migrate
@@ -24,3 +27,16 @@ complexity:
 
 lock:
 	docker compose run --rm web uv lock
+
+simulate:
+	docker compose run --rm web python scripts/client_simulator.py
+
+report:
+	docker compose run --rm web python scripts/generate_report.py
+
+all:
+	docker compose down -v --remove-orphans
+	docker compose build
+	docker compose run --rm web python manage.py makemigrations
+	docker compose run --rm web python manage.py migrate
+	docker compose up -d

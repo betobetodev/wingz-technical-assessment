@@ -1,0 +1,23 @@
+name: Demo & Verification
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  demo:
+    name: Run Demo Commands
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Spin up environment (down, build, migrate, and seed)
+      run: make all
+
+    - name: Run raw SQL report query
+      run: make report
+
+    - name: Run interactive client simulator
+      run: make simulate

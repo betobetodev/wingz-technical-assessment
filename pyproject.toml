@@ -23,10 +23,13 @@ dev = [
 [tool.ruff]
 line-length = 99
 target-version = "py314"
+exclude = [
+    "**/migrations/*",
+]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "W", "UP", "PL", "RUF", "N", "B", "C4"]
-ignore = []
+ignore = ["PLR2004", "RUF012"]
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings"
