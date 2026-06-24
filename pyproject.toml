@@ -25,6 +25,8 @@ line-length = 99
 target-version = "py314"
 exclude = [
     "**/migrations/*",
+    ".venv",
+    "venv",
 ]
 
 [tool.ruff.lint]
